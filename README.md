@@ -6,7 +6,9 @@ Authorized users can reserve a vehicle, check if the vehicle is already reserved
 
 Worked with PDO and checks for SQL injections, also form validation on the client and server side.
 
-It has an admin panel with all CRUD operations for customizing the content of the app
+It has an admin panel with all CRUD operations for customizing the content of the app.
+
+Afterwards, a chatbot was created using websocket (Pusher). Responding to messages is enabled on the admin panel, when a new message is sent by a new user, a new chat is opened for replies
 
 You can find more in the documentation on the author page.
 
