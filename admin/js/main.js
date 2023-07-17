@@ -63,8 +63,31 @@
     Chart.defaults.color = "#6C7293";
     Chart.defaults.borderColor = "#000000";
 
+    let tmpArray = [];
+    localStorage.setItem("chat",tmpArray);
+    //Check for 15min and delete chat
+   /*
+    let storageChat = localStorage.getItem("chat");
+    console.log(storageChat);
+    if(storageChat){
+        storageChat = JSON.parse(storageChat);
+        console.log(storageChat)
+        const currentTimestamp = Date.now();
+        const check15Min = currentTimestamp - (15 * 60 * 1000);
+        for(let c of storageChat){
+            console.log(c.time)
+            console.log(check15Min)
+            if(c.time >= check15Min && c.time <= currentTimestamp){
+                $('#'+c.userID).hide();
+                //......
+            }
+        }
+    }
+    else {
+        localStorage.setItem("chat",tmpArray);
+    }
+    */
 
-    
 })(jQuery);
 
 /****MOJ JS****/
@@ -239,7 +262,6 @@ function hideShowReview(id){
     })
 }
 
-
 function ajaxCallback(url,type,method,result){
     $.ajax({
         url: url,//logic/getAllOrder.php
@@ -344,5 +366,119 @@ function printMessages(messages){
     </div>`;
     }
     $('#mess').html(string);
+}
+
+
+/*******CHAT***********/
+Pusher.logToConsole = false;
+let pusher = new Pusher('d53e5e5280a3ec950d5e', {
+    cluster: 'eu'
+});
+
+let channel = pusher.subscribe('chatApp');
+let numberOfChat = 1;
+channel.bind('response', function(data) {
+    let message = data.message;
+    let id = data.id;
+    let findChats = $('#adminChatMessages').find('.chatBox');
+    let lsChat = localStorage.getItem("chat");
+    let adminName = data.admin;
+    let tmp = false;
+    let newObject = {
+        chatID: numberOfChat,
+        userID: id,
+        time: Date.now()
+    }
+    if(lsChat){
+        lsChat = JSON.parse(lsChat);
+        let chatID = null;
+        for(let c of lsChat){
+            if(c.userID == id){
+                tmp = true;
+                chatID = c.chatID;
+                break;
+            }
+        }
+        if(!tmp){
+            lsChat.push(newObject);
+            localStorage.setItem("chat",JSON.stringify(lsChat));
+            numberOfChat++;
+        }
+        else {
+            let chatTime = lsChat.find(x => x.chatID == chatID);
+            chatTime.time = Date.now();
+        }
+
+    }
+    else {
+        lsChat = [newObject]
+        localStorage.setItem("chat",JSON.stringify(lsChat));
+        numberOfChat++;
+    }
+
+    if(findChats.length){
+        let chatExists = false;
+        for(let f of findChats){
+            let chatID = f.dataset.id;
+            if(id == chatID){
+                chatExists = true;
+                break;
+            }
+        }
+        if(!chatExists){
+            printNewChat(id,"User: " +message);
+        }
+        else {
+            if(adminName){
+                let text = `<p>You: ${message}</p>`;
+                $('#chat-'+id).append(text);
+            }
+            else {
+                let text = `<p>User: ${message}</p>`;
+                $('#chat-'+id).append(text);
+            }
+        }
+    }
+    else {
+        printNewChat(id,"User: " +message)
+    }
+});
+
+$(document).on("click",'.sendButton',function (e){
+    e.preventDefault();
+    let chatID = $(this).val();
+    let adminName = $('#adminName').data('name');
+    /*
+    let userChats = JSON.parse(localStorage.getItem("chat"));
+    let allChats = document.querySelectorAll('.schatBox')
+     let id = userChats.find(x => {
+         if(x.userID == chatID){
+             return c.dataset.id;
+         }
+     })
+     */
+    let message = $('#userChatField-'+ chatID).val();
+    $('#userChatField-'+ chatID).val("");
+    $.post('../logic/chat.php',{
+                                chatMessage: message,
+                                userID: chatID,
+                                admin: adminName
+                                })
+})
+
+
+function printNewChat(id,message){
+    let string = `<div class="col-4 border chatBox me-3 mt-5" id="${id}" data-id="${id}">
+                                <div class=" chatAdmin">
+                                    <div id="chat-${id}" class="text-light">
+                                        <p>${message}</p>
+                                    </div>
+                                </div>
+                                <form class="position-relative mt-3">
+                                    <input type="text" class="form-control rounded-0" id="userChatField-${id}" name="chatMessage" placeholder="Send message...">
+                                    <button class="sendButton" value="${id}"><i class="fa fa-paper-plane"></i></button>
+                                </form>
+                            </div>`;
+    $('#adminChatMessages').append(string);
 }
 

@@ -33,4 +33,7 @@ include "../logic/functions.php";
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!--  Pusher   -->
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 </head>

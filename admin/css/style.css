@@ -307,3 +307,52 @@
 .ia-error{
     display: none;
 }
+.chatAdmin {
+    position: relative;
+    height: 30vh;
+    overflow-y: scroll;
+    padding-top: 10px;
+    word-wrap: break-word;
+
+}
+
+.chatBox {
+    width: 30% !important;
+}
+
+#chatMessages {
+    padding-top: 10px;
+}
+#chatMess form {
+    margin: 0px -13px;
+}
+.sendButton {
+    position: absolute;
+    right: 10px;
+    bottom: -17%;
+    transform: translateY(-50%);
+    color: #999;
+    cursor: pointer;
+    border: none;
+
+    background-color: transparent;
+}
+.sendButton:hover {
+    color: #333;
+}
+
+.chatAdmin::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chatAdmin::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+.chatAdmin::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the scrollbar thumb */
+}
+
+.chatAdmin::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Color of the scrollbar thumb on hover */
+}

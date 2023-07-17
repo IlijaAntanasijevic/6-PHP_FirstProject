@@ -21,6 +21,18 @@
         /**********Dohvatanje svih automobila i postavljanje u LS*************/
         ajaxCallback("logic/getAll.php","get",{table: "vehicle"},function (res){localStorage.setItem("cars",JSON.stringify(res))});
 
+        localStorage.setItem("chatID",$('#chatUserID').val());
+
+        setTimeout(function (){
+            let hasChatClass = $('#chatBox').hasClass('chat');
+            if(!hasChatClass){
+                $('#chatPopup').show();
+            }
+            else {
+                $('#chatPopup').hide()
+
+            }
+        },2000)
     });
 
 
@@ -772,9 +784,70 @@ function check(){
         })
     }
 }
+/********* CHAT ********/
+let tmpLS = localStorage.getItem("chatID");
+let chatUserID;
+if(tmpLS){
+    chatUserID = tmpLS;
+}
+else {
+    chatUserID = $('#chatUserID').val();
+}
+
+Pusher.logToConsole = false;
+
+let pusher = new Pusher('d53e5e5280a3ec950d5e', {
+    cluster: 'eu'
+});
+
+let channel = pusher.subscribe('chatApp');
+channel.bind('response', function(data) {
+    let user = $('#checkUser').val();
+    let message = data.message;
+    let id = data.id;
+    let admin = data.admin;
+    if(id == chatUserID ){ //user == "admin" ||
+        let text = `<p>${admin == false ? "You" : admin}: ${message}</p>`;
+        $('#chatMessages').append(text);
+        const element = document.getElementById('chatMessages');
+        if(element.scrollHeight > element.clientHeight){
+            element.style.overflowY = "scroll";
+            $('#closeChat').css('right',"5%")
+        }
+        else {
+            element.style.overflowY = "hidden";
+            $('#closeChat').css('right',"0%")
+        }
+        (function (){
+            element.scrollTop = element.scrollHeight;
+        })()
+    }
+
+});
 
 
-//#vehicles
+//Chat Box
+
+$('#chatBox').click(function (){
+    let hasChatClass = $(this).hasClass('chat');
+    if(!hasChatClass){
+        $(this).addClass('chat')
+        $('#chatPopup').hide();
+    }
+})
+
+$(document).on("click","#closeChat",function (){
+    $('#chatBox').removeClass('chat');
+})
+
+$('#sendButton').click(function (e){
+    e.preventDefault();
+    let message = $('#userChatField').val();
+    $('#userChatField').val("");
+    $.post('logic/chat.php',{chatMessage: message,userID: chatUserID},function (response){
+    })
+})
+
 
 
 

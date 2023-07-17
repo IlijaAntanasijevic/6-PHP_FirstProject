@@ -35,6 +35,7 @@
                 <a href="users.php" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Users</a>
                 <a href="models.php" class="nav-item nav-link"><i class="fa fa-car me-2"></i>Models</a>
                 <a href="reviews.php" class="nav-item nav-link"><i class="fa fa-star me-2"></i>Reviews</a>
+                <a href="chat.php" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i>Chat</a>
 
             </div>
         </nav>

@@ -6,7 +6,14 @@ include "logic/functions.php";
 $nav = selectNavigation();
 global $infoCompany;
 global $links;
-//var_dump($_SESSION["user"]);
+$user = null;
+if(isset($_SESSION['user']) && $_SESSION['user']->role_name == "admin"){
+    $user = "admin";
+}
+
+$uniqID = uniqid();
+$_SESSION['chatUserID'] = $uniqID;
+
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +45,9 @@ global $links;
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!--  Pusher   -->
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 </head>
 <body>
 <!-- Topbar Start -->
@@ -118,4 +128,21 @@ global $links;
         </div>
     </div>
     <!-- Navbar End -->
+
+<div id="chatBox">
+    <div id="chatPopup">
+        <p></p>
+    </div>
+    <span id="closeChat">X</span>
+    <form  method="post">
+        <input type="text" class="form-control" id="userChatField" name="chatMessage" placeholder="Send message...">
+        <button id="sendButton"><i class="fa fa-paper-plane"></i></button>
+        <input type="hidden" id="chatUserID" value="<?= $uniqID?>">
+        <input type="hidden" id="checkUser" value="<?= $user?>">
+    </form>
+    <div id="chatMessages" class="text-light">
+        <p>Admin: How we can help you?</p>
+    </div>
+    <img src="img/chat.png" alt="chatImg"/>
+</div>
 
