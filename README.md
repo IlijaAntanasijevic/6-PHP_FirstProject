@@ -1,21 +1,17 @@
-# Second PHP Project 
+# First PHP Project
 
-Improvement of procedural PHP, creating a customized database.
+Learning the basics of procedural PHP, creating a customized database.
 
-Creating an e-commerce site, with the possibility for authorized users to buy the product, it is also possible to leave comments and ratings in case the product has been purchased
+Authorized users can reserve a vehicle, check if the vehicle is already reserved. Users who have made a reservation can also leave a review for the rented vehicle
 
-Worked with PDO and checks for SQL injections, also form validation on the client and server side. Pagination,sorting and filtering on server side.
+Worked with PDO and checks for SQL injections, also form validation on the client and server side.
 
-The entire content is in the database or in the config file.It is possible to send emails using PHP mailer.
-
-It is possible to block the user and watch their activity. A text file was used to complete it.
-
-It has an admin panel with all CRUD operations for customizing the content of the app.
+It has an admin panel with all CRUD operations for customizing the content of the app
 
 You can find more in the documentation on the author page.
 
-It was created on 2023-Jun-09
+It was created on 2023-Mar-15
 
-Link: https://sneakzilija.000webhostapp.com/index.php
+Link: https://ilijaroyalcars.000webhostapp.com/
 
-Used template: https://themewagon.github.io/karma/
+Used template:https://www.free-css.com/assets/files/free-css-templates/preview/page282/royal-cars/
