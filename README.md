@@ -1,16 +1,16 @@
 # First PHP Project
 
-Learning the basics of procedural PHP, creating a customized database.
+I am learning the basics of procedural PHP, and creating a customized database.
 
-Authorized users can reserve a vehicle, check if the vehicle is already reserved. Users who have made a reservation can also leave a review for the rented vehicle
+Authorized users can reserve a vehicle, and check if the vehicle is already reserved. Users who have made a reservation can also leave a review for the rented vehicle
 
-Worked with PDO and checks for SQL injections, also form validation on the client and server side.
+Worked with PDO and checked for SQL injections, as well as form validation on the client and server side.
 
-It has an admin panel with all CRUD operations for customizing the content of the app.
+It has an admin panel with all CRUD operations for customizing the app's content.
 
-Afterwards, a chatbot was created using websocket (Pusher). Responding to messages is enabled on the admin panel, when a new message is sent by a new user, a new chat is opened for replies
+Afterward, a chatbot was created using a web socket (Pusher). Responding to messages is enabled on the admin panel when a new user sends a new message, and a new chat is opened for replies
 
-You can find more in the documentation on the author page.
+More information is available on the author page in the documentation.
 
 It was created on 2023-Mar-15
 
