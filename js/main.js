@@ -827,6 +827,7 @@ channel.bind('response', function(data) {
 
 
 //Chat Box
+// Add Validation !! SQL Injections
 
 $('#chatBox').click(function (){
     let hasChatClass = $(this).hasClass('chat');
