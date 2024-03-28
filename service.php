@@ -32,7 +32,11 @@
                     <h1 class="display-1 text-uppercase text-primary mb-4">50% OFF</h1>
                     <h1 class="text-uppercase text-light mb-4">Special Offer For New Members</h1>
                     <p class="mb-4">Only for Sunday from 1st Jan to 30th Jan 2045</p>
-                    <a class="btn btn-primary mt-2 py-3 px-5" href="">Register Now</a>
+                    <?php if(!isset($_SESSION["user"])): ?>
+                        <a class="btn btn-primary mt-2 py-3 px-5" href="register.php">Register Now</a>
+                    <?php else: ?>
+                        <a class="btn btn-primary mt-2 py-3 px-5" href="car.php">Booking Now</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

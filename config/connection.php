@@ -1,6 +1,6 @@
 <?php
 $SERVER = "localhost";
-$DATABASE = "rentacart";
+$DATABASE = "rentacar";
 $USER = "root";
 $PASSWORD = "";
 
