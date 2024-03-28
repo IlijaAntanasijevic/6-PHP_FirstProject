@@ -14,6 +14,7 @@ More information is available on the author page in the documentation.
 
 It was created on 2023-Mar-15
 
-Link: https://ilijaroyalcars.000webhostapp.com/
+HOSTED FREE ON infinityfree.com
+Link: http://royalcars.wuaze.com/
 
 Used template:https://www.free-css.com/assets/files/free-css-templates/preview/page282/royal-cars/
